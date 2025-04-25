@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tamagotchi Game Tracker</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>🎮 Tamagotchi Game Tracker</h1>
+    <p>Feed your pet by logging the games you’ve played!</p>
+  </header>
+
+  <main>
+    <!-- Pet Display -->
+    <section id="pet-section">
+      <h2>🐾 Your Pet</h2>
+      <img src="pet_happy.png" alt="Your Tamagotchi" id="pet-image" />
+      <p>Happiness: <span id="happiness">0</span> / 100</p>
+      <p>Hunger: <span id="hunger">0</span> / 100</p>
+    </section>
+
+    <!-- Game Review Form -->
+    <section id="review-form-section">
+      <h2>📝 Add Game Review</h2>
+      <form id="review-form">
+        <label for="title">Game Title:</label>
+        <input type="text" id="title" name="title" required /><br />
+
+        <label for="rating">Rating (1–10):</label>
+        <input type="number" id="rating" name="rating" min="1" max="10" required /><br />
+
+        <label for="review">Your Review:</label><br />
+        <textarea id="review" name="review" rows="4" required></textarea><br />
+
+        <button type="submit">Submit Review & Feed Pet</button>
+      </form>
+    </section>
+
+    <!-- Review List -->
+    <section id="recent-reviews-section">
+      <h2>🗒️ Recent Reviews</h2>
+      <ul id="review-list">
+        <!-- Reviews will be dynamically loaded here -->
+      </ul>
+    </section>
+  </main>
+
+
+  <script src="app.js"></script>
+</body>
+</html>
