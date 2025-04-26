@@ -1,0 +1,35 @@
+name: Web App CI/CD
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web-app
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Build Docker image
+        run: docker build -t web-app .
+      
+      - name: Run unit tests in Docker container
+        env:
+          MONGO_URI: ${{secrets.ATLAS_MONGO_URI}}
+        run: docker run --rm -e MONGO_URI=${{secrets.ATLAS_MONGO_URI}} web-app pytest

@@ -8,13 +8,11 @@ flask = "*"
 pymongo = "*"
 flask-pymongo = "*"
 python-dotenv = "*"
+typing-extensions = "*"
 
 [dev-packages]
-pylint = "*"
-black = "*"
 pytest = "*"
-typing-extensions = "*"
-pymongo = "*"
+pytest-flask = "*"
 
 [requires]
 python_version = "3.12"
