@@ -70,4 +70,4 @@ jobs:
             docker pull ${{secrets.DOCKERHUB_USERNAME}}/swe-project5-team-cc-web-app:latest
             docker stop web-app || true
             docker rm web-app || true
-            docker run -d --name web-app -p 80:5001 ${{secrets.DOCKERHUB_USERNAME}}/swe-project-5-team-cc-web-app:latest
+            docker run -d --name web-app -p 80:5001 ${{secrets.DOCKERHUB_USERNAME}}/swe-project5-team-cc-web-app:latest
