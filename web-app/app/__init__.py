@@ -3,7 +3,7 @@ from flask import Flask
 from flask_pymongo import PyMongo
 from os import environ
 from dotenv import load_dotenv
-from app.routes import index, login, feed
+from app.routes import index, login, feed, create_post, post_reaction
 
 load_dotenv()
 
@@ -19,3 +19,5 @@ app.mongo = mongo
 app.route("/")(index)
 app.route("/login", methods=["GET", "POST"])(login)
 app.route("/feed")(feed)
+app.route("/post", methods=["GET", "POST"])(create_post)
+app.route("/react", methods=["POST"])(post_reaction)

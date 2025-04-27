@@ -3,22 +3,118 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>Feed | APP NAME (placeholder)</title>
-  <link rel="stylesheet" href="../static/style.css" />
+  <title>Feed | Game Reviews</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <script>
+    //AJAX function
+    const reactToPost = (postId, reactionType) => {
+
+      const formData = new FormData()
+      formData.append('post_id', postId)
+      formData.append('reaction_type', reactionType)
+      
+      fetch('{{ url_for("post_reaction") }}', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          document.getElementById(`like-count-${postId}`).textContent = data.likes
+          document.getElementById(`dislike-count-${postId}`).textContent = data.dislikes
+          
+          const likeBtn = document.getElementById(`like-btn-${postId}`);
+          const dislikeBtn = document.getElementById(`dislike-btn-${postId}`);
+          
+          if (data.action === "added") {
+            if (reactionType === "like") {
+              likeBtn.classList.add("active")
+            } else {
+              dislikeBtn.classList.add("active")
+            }
+          } 
+          else if (data.action === "removed") {
+            if (reactionType === "like") {
+              likeBtn.classList.remove("active")
+            } else {
+              dislikeBtn.classList.remove("active")
+            }
+          }
+          else if (data.action === "changed") {
+            if (reactionType === "like") {
+              likeBtn.classList.add("active")
+              dislikeBtn.classList.remove("active")
+            } else {
+              likeBtn.classList.remove("active")
+              dislikeBtn.classList.add("active")
+            }
+          }
+        } else {
+          alert(data.message || 'Issue recording your reaction');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error)
+        alert('An error occurred while processing your reaction')
+      })
+    }
+  </script>
 </head>
 <body>
   <nav>
-    <a href="home.html">Home</a>
-    <a href="account.html">My Account</a>
-    <a href="post.html">Make a Post</a>
-    <a href="index.html">Logout</a>
+    <a href="{{ url_for('index') }}">Home</a>
+    <a href="{{ url_for('feed') }}">Game Reviews</a>
+    <a href="{{ url_for('create_post') }}">Make a Post</a>
+    <a href="{{ url_for('login') }}">Logout</a>
   </nav>
 
   <main>
-    <h1>Other Game Reviews</h1>
-    <ul>
-        <!--Link to db to display saved reviews?-->
-    </ul>
+    <h1>Game Reviews Feed</h1>
+    
+    {% if posts %}
+      <div class="feed-container">
+        {% for post in posts %}
+          <div class="post-card">
+            <h2>{{ post.game }}</h2>
+            <div class="post-meta">
+              <span class="rating">Rating: {{ post.rating }}/10</span>
+              <span class="recommendation">
+                {% if post.recommend %}
+                  <span class="recommend">✓ Recommends</span>
+                {% else %}
+                  <span class="not-recommend">✗ Does not recommend</span>
+                {% endif %}
+              </span>
+            </div>
+            <div>
+              Hours Played: {{post.hours_played}}
+            </div>
+            <p class="description">{{ post.description }}</p>
+            <div class="post-footer">
+              <div class="likes-dislikes">
+                <button 
+                  id="like-btn-{{ post._id }}" 
+                  class="reaction-btn {% if post.user_reaction == 'like' %}active{% endif %}" 
+                  onclick="reactToPost('{{ post._id }}', 'like')"
+                >
+                  👍 <span id="like-count-{{ post._id }}">{{ post.likes }}</span>
+                </button>
+                <button 
+                  id="dislike-btn-{{ post._id }}" 
+                  class="reaction-btn {% if post.user_reaction == 'dislike' %}active{% endif %}" 
+                  onclick="reactToPost('{{ post._id }}', 'dislike')"
+                >
+                  👎 <span id="dislike-count-{{ post._id }}">{{ post.dislikes }}</span>
+                </button>
+              </div>
+              <small>Posted by {{ post.username }}</small>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>No reviews available yet. Be the first to <a href="{{ url_for('create_post') }}">post a review</a>!</p>
+    {% endif %}
   </main>
 </body>
 </html>
