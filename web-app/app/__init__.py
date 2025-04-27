@@ -1,14 +1,21 @@
+import os
 from flask import Flask
 from flask_pymongo import PyMongo
 from os import environ
 from dotenv import load_dotenv
+from app.routes import index, login, feed
 
 load_dotenv()
 
 app = Flask(__name__)
 
-#Waiting on larry for this
 app.config["MONGO_URI"] = environ.get("MONGO_URI", "")
+app.config["SECRET_KEY"] = os.urandom(24)
 
 mongo = PyMongo(app)
-from app import routes
+app.mongo = mongo
+
+# Register routes
+app.route("/")(index)
+app.route("/login", methods=["GET", "POST"])(login)
+app.route("/feed")(feed)
