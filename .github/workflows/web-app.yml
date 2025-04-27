@@ -60,7 +60,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: SSH into DigitalOcean
+      - name: Login to DigitalOcean and Deploy
         uses: appleboy/ssh-action@v0.1.7
         with:
           host: ${{secrets.DIGITALOCEAN_HOST}}
