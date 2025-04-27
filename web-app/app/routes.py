@@ -42,7 +42,44 @@ def login():
 
 def feed():
     """
-    feed
+    Display feed
     """
-    return render_template("feed.html")
+
+    posts = list(get_mongo().db.posts.find().sort("_id", -1))
+    
+    for post in posts:
+        post["user_id"] = str(post["user_id"])
+    
+    return render_template("feed.html", posts=posts)
+
+def create_post():
+    """
+    Create a post
+    """
+    if request.method == "POST":
+        if "user_id" not in session:
+            flash("You must be logged in to create a post")
+            return redirect(url_for("login"))
+        
+        game_title = request.form.get("game_title")
+        rating = int(request.form.get("rating"))
+        description = request.form.get("description")
+        recommends = request.form.get("recommends") == "true"
+        
+        post = {
+            "user_id": ObjectId(session["user_id"]),
+            "game_title": game_title,
+            "rating": rating,
+            "description": description,
+            "recommends": recommends,
+            "likes": 0,
+            "dislikes": 0
+        }
+        
+        get_mongo().db.posts.insert_one(post)
+        flash("Your review has been posted!")
+        
+        return redirect(url_for("feed"))
+    
+    return render_template("post.html")
 
