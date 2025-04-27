@@ -5,6 +5,60 @@
   <meta charset="UTF-8" />
   <title>Feed | Game Reviews</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <script>
+    //AJAX function
+    const reactToPost = (postId, reactionType) => {
+
+      const formData = new FormData()
+      formData.append('post_id', postId)
+      formData.append('reaction_type', reactionType)
+      
+      fetch('{{ url_for("post_reaction") }}', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          document.getElementById(`like-count-${postId}`).textContent = data.likes
+          document.getElementById(`dislike-count-${postId}`).textContent = data.dislikes
+          
+          const likeBtn = document.getElementById(`like-btn-${postId}`);
+          const dislikeBtn = document.getElementById(`dislike-btn-${postId}`);
+          
+          if (data.action === "added") {
+            if (reactionType === "like") {
+              likeBtn.classList.add("active")
+            } else {
+              dislikeBtn.classList.add("active")
+            }
+          } 
+          else if (data.action === "removed") {
+            if (reactionType === "like") {
+              likeBtn.classList.remove("active")
+            } else {
+              dislikeBtn.classList.remove("active")
+            }
+          }
+          else if (data.action === "changed") {
+            if (reactionType === "like") {
+              likeBtn.classList.add("active")
+              dislikeBtn.classList.remove("active")
+            } else {
+              likeBtn.classList.remove("active")
+              dislikeBtn.classList.add("active")
+            }
+          }
+        } else {
+          alert(data.message || 'Issue recording your reaction');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error)
+        alert('An error occurred while processing your reaction')
+      })
+    }
+  </script>
 </head>
 <body>
   <nav>
@@ -21,24 +75,39 @@
       <div class="feed-container">
         {% for post in posts %}
           <div class="post-card">
-            <h2>{{ post.game_title }}</h2>
+            <h2>{{ post.game }}</h2>
             <div class="post-meta">
               <span class="rating">Rating: {{ post.rating }}/10</span>
               <span class="recommendation">
-                {% if post.recommends %}
+                {% if post.recommend %}
                   <span class="recommend">✓ Recommends</span>
                 {% else %}
                   <span class="not-recommend">✗ Does not recommend</span>
                 {% endif %}
               </span>
             </div>
+            <div>
+              Hours Played: {{post.hours_played}}
+            </div>
             <p class="description">{{ post.description }}</p>
             <div class="post-footer">
               <div class="likes-dislikes">
-                <span>👍 {{ post.likes }}</span>
-                <span>👎 {{ post.dislikes }}</span>
+                <button 
+                  id="like-btn-{{ post._id }}" 
+                  class="reaction-btn {% if post.user_reaction == 'like' %}active{% endif %}" 
+                  onclick="reactToPost('{{ post._id }}', 'like')"
+                >
+                  👍 <span id="like-count-{{ post._id }}">{{ post.likes }}</span>
+                </button>
+                <button 
+                  id="dislike-btn-{{ post._id }}" 
+                  class="reaction-btn {% if post.user_reaction == 'dislike' %}active{% endif %}" 
+                  onclick="reactToPost('{{ post._id }}', 'dislike')"
+                >
+                  👎 <span id="dislike-count-{{ post._id }}">{{ post.dislikes }}</span>
+                </button>
               </div>
-              <small>Posted by User #{{ post.user_id }}</small>
+              <small>Posted by {{ post.username }}</small>
             </div>
           </div>
         {% endfor %}
