@@ -19,5 +19,4 @@ app.mongo = mongo
 app.route("/")(index)
 app.route("/login", methods=["GET", "POST"])(login)
 app.route("/feed")(feed)
-app.route("/post", methods=["GET"])(create_post)
-app.route("/create_post", methods=["POST"])(create_post)
+app.route("/post", methods=["GET", "POST"])(create_post)
