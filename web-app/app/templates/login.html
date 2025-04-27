@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+<head>
+  <meta charset="UTF-8" />
+  <title>Login | APP NAME (placeholder)</title>
+  <link rel="stylesheet" href="../static/style.css" />
+</head>
+<body>
+  <div class="form-container">
+    <h1>🎮 Welcome Larry Yang My KING</h1>
+    <form method="POST" action="{{ url_for('login') }}">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" placeholder="Enter your username" required>
+
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+          <button type="submit">Sign In</button>
+        </form>
+    <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+  </div>
+</body>
+</html>
