@@ -13,6 +13,7 @@ app.config["MONGO_URI"] = environ.get("MONGO_URI", "")
 app.config["SECRET_KEY"] = os.urandom(24)
 
 mongo = PyMongo(app)
+app.mongo = mongo
 
 # Register routes
 app.route("/")(index)
