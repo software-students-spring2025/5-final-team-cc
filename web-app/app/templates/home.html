@@ -10,9 +10,30 @@
   {% include '_navbar.html' %}
 
   <main class="home-center">
-    <h1>Welcome back, (USER NAME)!</h1>
-    <h2> PET NAME PLACEHOLDER </h2>
-    <img src="pet_happy.png" alt="Pet" class="pet-large" />
+    <h1>Welcome back, {{ user.username }}</h1>
+    <h2>{{ user.username }} Junior</h2>
+
+    {# pick an image based on how many hours it’s been #}
+    {% if hours_since > 120 %}
+      <img src="{{ url_for('static', filename='pet_happy.png') }}"
+           alt="Super Sad" class="pet-large" />
+    {% elif hours_since > 96 %}
+      <img src="{{ url_for('static', filename='pet_content.png') }}"
+           alt="Sad" class="pet-large" />
+    {% elif hours_since > 72 %}
+      <img src="{{ url_for('static', filename='pet_tired.png') }}"
+           alt="Neutral" class="pet-large" />
+    {% elif hours_since > 48 %}
+    <img src="{{ url_for('static', filename='pet_tired.png') }}"
+          alt="Happy" class="pet-large" />
+    {% elif hours_since > 24 %}
+      <img src="{{ url_for('static', filename='pet_tired.png') }}"
+          alt="Super Happy" class="pet-large" />
+    {% else %}
+      <img src="{{ url_for('static', filename='pet_sad.png') }}"
+           alt="Glowing" class="pet-large" />
+    {% endif %}
+
     <p>Happiness: <span id="happiness">75</span> / 100</p>
   </main>
 </body>

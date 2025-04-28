@@ -33,7 +33,6 @@ def login():
 
         # look for the user in the MongoDB 'users' collection
         user = get_mongo().db.user.find_one({"username": username})
-        print(user) 
 
         if user and user["password"] == password:
             session["user_id"] = str(user["_id"])  # user session
@@ -83,8 +82,25 @@ def home():
     home (tamagotchi)
     """
 
+    user_id_obj = ObjectId(session["user_id"])
+    user = get_mongo().db.user.find_one({"_id": user_id_obj})
 
-    return render_template("home.html")
+    last_posted = user.get("last_posted")
+
+    if last_posted.tzinfo is None:
+        last_posted = last_posted.replace(tzinfo=UTC)
+    now = datetime.now(UTC)
+
+    delta = now - last_posted
+    hours_since = delta.total_seconds() / 3600
+    days_since = delta.days
+
+    return render_template(
+      "home.html",
+      user=user,
+      hours_since=hours_since,
+      days_since=days_since
+    )
 
 
 def feed():
