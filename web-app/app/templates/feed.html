@@ -61,12 +61,7 @@
   </script>
 </head>
 <body>
-  <nav>
-    <a href="{{ url_for('index') }}">Home</a>
-    <a href="{{ url_for('feed') }}">Game Reviews</a>
-    <a href="{{ url_for('create_post') }}">Make a Post</a>
-    <a href="{{ url_for('login') }}">Logout</a>
-  </nav>
+  {% include '_navbar.html' %}
 
   <main>
     <h1>Game Reviews Feed</h1>
