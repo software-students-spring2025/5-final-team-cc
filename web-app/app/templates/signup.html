@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-    
+
 <head>
   <meta charset="UTF-8" />
   <title>Sign Up | GameLog</title>
-  <link rel="stylesheet" href="../static/style.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='signup.css') }}" />
 </head>
+
 <body>
   <main class="signup-container">
     <div class="form-card">
@@ -13,13 +14,13 @@
 
       {% with messages = get_flashed_messages() %}
         {% if messages %}
-        <div class="flash-messages">
-          {% for message in messages %}
-          <p style="color: rgb(255, 0, 0);">{{ message }}</p>
-          {% endfor %}
-        </div>
+          <div class="flash-messages">
+            {% for message in messages %}
+              <p class="flash-message">{{ message }}</p>
+            {% endfor %}
+          </div>
         {% endif %}
-        {% endwith %}
+      {% endwith %}
 
       <form method="POST" action="{{ url_for('signup') }}">
         <div class="form-group">
@@ -37,7 +38,7 @@
 
       <p class="login-text">
         Already have an account? 
-        <a href="login">Log in</a>  <!-- just regular href for now -->
+        <a href="login.html">Log in</a>
       </p>
     </div>
   </main>
