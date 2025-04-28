@@ -1,0 +1,113 @@
+
+  /* General Page */
+  html, body {
+    height: 100%;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom, #f2f2f2, #dfe9f3);
+    margin: 0;
+    padding: 0;
+  }
+  
+  
+  /* Signup container */
+  .signup-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* fill full screen height */
+    padding: 2rem; /* in case it's on a small phone */
+    box-sizing: border-box;
+  }
+  
+  
+  /* Form card */
+  .form-card {
+    background-color: #ffffff;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }
+  
+  /* Welcome title */
+  .welcome-title {
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: #2c3e50;
+  }
+  
+  /* Form fields */
+  .form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+  }
+  
+  label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+  }
+  
+  input[type="text"]:focus,
+  input[type="password"]:focus {
+    border-color: #4a90e2;
+    outline: none;
+  }
+  
+  /* Sign Up Button */
+  .btn-primary {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #4caf50;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 1rem;
+  }
+  
+  .btn-primary:hover {
+    background-color: #45a049;
+  }
+  
+  /* Login link text */
+  .login-text {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .login-text a {
+    color: #4a90e2;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .login-text a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Flash messages */
+  .flash-messages {
+    margin-bottom: 1rem;
+  }
+  
+  .flash-message {
+    color: red;
+    font-weight: bold;
+  }
+  
