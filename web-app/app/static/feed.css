@@ -1,0 +1,188 @@
+/* Navbar */
+.navbar {
+    background-color: #ffffff;
+    border-bottom: 2px solid #e0e0e0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  .nav-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+  }
+  
+  .nav-link {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    color: #2c3e50;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .nav-link:hover {
+    background-color: #f1f1f1;
+    color: #f39c12;
+  }
+  
+  .logout {
+    color: #e74c3c;
+  }
+  
+  .logout:hover {
+    background-color: #fdecea;
+    color: #ff6b6b;
+  }
+  
+  /* Body */
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+    color: #333;
+  }
+  
+  /* Title */
+  .page-title {
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+  }
+  
+  /* Feed container */
+  .feed-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto 4rem auto;
+    padding: 0 1rem;
+  }
+  
+  /* Post card */
+  .post-card {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 1px solid #ddd;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Tag at top */
+  .post-tag {
+    display: inline-block;
+    background-color: #f39c12;
+    color: white;
+    font-size: 0.75rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Rating and Recommendation */
+  .rating-line {
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+  }
+  
+  .recommendation-line {
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+  
+  .recommend {
+    color: #27ae60;
+  }
+  
+  .not-recommend {
+    color: #e74c3c;
+  }
+  
+  /* Hours played and description */
+  .hours-played {
+    margin-top: 0.5rem;
+  }
+  
+  .description {
+    margin: 1rem 0;
+  }
+  
+  /* Divider */
+  .divider {
+    border: none;
+    height: 1px;
+    background-color: #eee;
+    margin: 1rem 0;
+  }
+  
+  /* Like/dislike section */
+  .likes-dislikes {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+  }
+  
+  .reaction-btn {
+    background-color: #f1f1f1;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    margin-right: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .reaction-btn:hover {
+    background-color: #ddd;
+  }
+  
+  .reaction-btn.active {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  small {
+    display: block;
+    margin-top: 0.75rem;
+    color: #777;
+    font-size: 0.9rem;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 600px) {
+    .nav-container {
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+  
+    .feed-container {
+      padding: 0 1rem;
+    }
+  
+    .post-card {
+      padding: 1rem;
+    }
+  
+    .page-title {
+      font-size: 2rem;
+      margin-top: 2rem;
+    }
+  }
+  

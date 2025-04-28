@@ -3,22 +3,34 @@
   
 <head>
   <meta charset="UTF-8" />
-  <title>Login | APP NAME (placeholder)</title>
-  <link rel="stylesheet" href="../static/style.css" />
+  <title>Login | Game Reviews</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}" />
 </head>
+
 <body>
-  <div class="form-container">
-    <h1>Welcome To James Hou Apartment</h1>
-    <form method="POST" action="{{ url_for('login') }}">
+  <main class="login-container">
+    <div class="form-card">
+      <h1 class="welcome-title">Welcome to Game Reviews</h1>
+
+      <form method="POST" action="{{ url_for('login') }}">
+        <div class="form-group">
           <label for="username">Username</label>
-          <input type="text" id="username" name="username" placeholder="Enter your username" required>
+          <input type="text" id="username" name="username" placeholder="Enter your username" required />
+        </div>
 
+        <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" id="password" name="password" placeholder="Enter your password" required>
+          <input type="password" id="password" name="password" placeholder="Enter your password" required />
+        </div>
 
-          <button type="submit">Sign In</button>
-        </form>
-    <p>Don't have an account? <a href="signup.html">Sign up</a></p>
-  </div>
+        <button type="submit" class="btn-primary">Sign In</button>
+      </form>
+
+      <p class="signup-text">
+        Don't have an account? 
+        <a href="signup.html">Sign up</a>  <!-- just regular href for now -->
+      </p>
+    </div>
+  </main>
 </body>
 </html>

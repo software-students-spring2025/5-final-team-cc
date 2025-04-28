@@ -1,0 +1,140 @@
+/* Navbar styling */
+.navbar {
+    background-color: #ffffff;
+    border-bottom: 2px solid #e0e0e0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  .nav-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+  }
+  
+  .nav-link {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    color: #2c3e50;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .nav-link:hover {
+    background-color: #f1f1f1;
+    color: #f39c12;
+  }
+  
+  .logout {
+    color: #e74c3c;
+  }
+  
+  .logout:hover {
+    background-color: #fdecea;
+    color: #ff6b6b;
+  }
+  
+
+
+
+
+/* General Page */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom, #f2f2f2, #dfe9f3);
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Main post container */
+  .post-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3rem;
+  }
+  
+  /* Page title */
+  .post-title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #2c3e50;
+  }
+  
+  /* Form card */
+  .form-card {
+    background-color: #ffffff;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  /* Form fields */
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+  }
+  
+  input[type="text"]:focus,
+  input[type="number"]:focus,
+  textarea:focus,
+  select:focus {
+    border-color: #4a90e2;
+    outline: none;
+  }
+  
+  /* Submit Button */
+  .btn-primary {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #4caf50;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 1rem;
+  }
+  
+  .btn-primary:hover {
+    background-color: #45a049;
+  }
+  
+  /* Responsive */
+  @media (max-width: 600px) {
+    .post-title {
+      font-size: 2rem;
+    }
+    
+    .form-card {
+      padding: 2rem;
+    }
+  }
+  
