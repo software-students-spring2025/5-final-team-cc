@@ -9,7 +9,7 @@ from flask import (
     jsonify,
 )
 from bson.objectid import ObjectId
-from datetime import datetime
+from datetime import datetime, timezone
 
 def get_mongo():
     """
@@ -28,19 +28,64 @@ def login():
     login
     """
     if request.method == "POST":
-        username = request.form["username"]  # get username from form
-        password = request.form["password"]  # get password from form
+        username = request.form.get("username")  # get username from form
+        password = request.form.get("password")  # get password from form
 
         # look for the user in the MongoDB 'users' collection
         user = get_mongo().db.user.find_one({"username": username})
-        print(user)
+        print(user) 
 
         if user and user["password"] == password:
             session["user_id"] = str(user["_id"])  # user session
-            return redirect(url_for("feed"))  # direct to home page
+            return redirect(url_for("home"))  # direct to home page
         flash("Invalid username or password. Please try again.")
 
     return render_template("login.html")  # render login page
+
+def signup():
+    """
+    signup
+    """
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+    
+        # check if username already in use
+        existing_user = get_mongo().db.user.find_one({"username": username})
+        if existing_user:
+                flash("Username is already in use. Please choose another username.")
+                return render_template("signup.html")
+
+        # create a user
+        get_mongo().db.user.insert_one(
+            {
+                "username": username,
+                "password": password,
+                "last_post_time": datetime.fromtimestamp(0, tz=timezone.utc)
+            }
+        )
+        flash("Account created successfully! Please log in.")
+        return redirect(url_for("login"))
+
+    return render_template("signup.html")
+
+def logout():
+    """
+    logout
+    """
+    session.clear()
+    flash("Thanks for using GameLog!")
+
+    return redirect(url_for("login"))
+
+def home():
+    """
+    home (tamagotchi)
+    """
+
+
+    return render_template("home.html")
+
 
 def feed():
     """
