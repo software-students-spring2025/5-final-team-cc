@@ -12,6 +12,16 @@
     <div class="form-card">
       <h1 class="welcome-title">GameLog</h1>
 
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="flash-messages">
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+
       <form method="POST" action="{{ url_for('login') }}">
         <div class="form-group">
           <label for="username">Username</label>

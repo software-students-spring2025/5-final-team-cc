@@ -65,6 +65,16 @@
   <main>
     <h1 class="page-title">Game Reviews Feed</h1>
 
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash-messages">
+          {% for message in messages %}
+          <p>{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
     {% if posts %}
       <div class="feed-container">
         {% for post in posts %}

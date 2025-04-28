@@ -1,5 +1,5 @@
-/* Navbar */
-.navbar {
+  /* Navbar */
+  .navbar {
     background-color: #ffffff;
     border-bottom: 2px solid #e0e0e0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -185,4 +185,14 @@
       margin-top: 2rem;
     }
   }
+
+  /* Flash messages */
+  .flash-messages {
+    text-align: center;
+  }
+  
+  .flash-messages p {
+    color: #4caf50;
+  }
+  
   

@@ -133,7 +133,7 @@ def create_post():
     """
     if request.method == "POST":
         if "user_id" not in session:
-            flash("You must be logged in to create a post")
+            flash("You must be logged in to create a post.")
             return redirect(url_for("login"))
         
         game_title = request.form.get("game_title")
