@@ -1,6 +1,6 @@
 import pytest
 from flask import Flask
-from routes import index, login, feed, post, logout  # Need import all our route functions (might be missing a few)
+from app.routes import index, login, feed, post, logout # Need import all our route functions (might be missing a few)
 
 def create_app():
     app = Flask(__name__)
