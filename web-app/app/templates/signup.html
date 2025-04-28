@@ -11,6 +11,16 @@
     <div class="form-card">
       <h1 class="welcome-title">Create a GameLog Account</h1>
 
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="flash-messages">
+          {% for message in messages %}
+          <p style="color: rgb(255, 0, 0);">{{ message }}</p>
+          {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
       <form method="POST" action="{{ url_for('signup') }}">
         <div class="form-group">
           <label for="username">Username</label>

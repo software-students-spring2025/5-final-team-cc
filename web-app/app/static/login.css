@@ -1,5 +1,5 @@
-/* General page */
-body {
+  /* General page */
+  body {
     font-family: 'Segoe UI', sans-serif;
     background: linear-gradient(to bottom, #f2f2f2, #dfe9f3);
     margin: 0;
@@ -94,4 +94,14 @@ body {
   .signup-text a:hover {
     text-decoration: underline;
   }
+
+  /* Flash messages */
+  .flash-messages {
+    text-align: center;
+  }
+  
+  .flash-messages p {
+    color: #e74c3c;
+  }
+  
   
