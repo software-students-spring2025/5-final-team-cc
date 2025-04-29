@@ -16,8 +16,6 @@ def create_app():
     # Configure MongoDB Atlas
     mongo_uri = os.getenv('MONGO_URI', '')
     if mongo_uri:
-        # Append -test to the database name
-        mongo_uri = mongo_uri.rsplit('/', 1)[0] + '/test_db'
         app.config["MONGO_URI"] = mongo_uri
         mongo = PyMongo(app)
         app.mongo = mongo
@@ -47,4 +45,4 @@ def client():
 @pytest.fixture
 def test_user_id():
     # Use a valid ObjectId for testing
-    return ObjectId('680e7b6d99d1c4b173c2944a')  # Using one of the existing user IDs from your database
+    return ObjectId('68101b9e0bc5c47416d79076')  # Using the dummy johndoe test user
