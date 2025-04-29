@@ -99,14 +99,18 @@ def home():
     happiness = max(0, min(1, 1-(hours_since/120)))
     happiness = round(happiness*100)
 
-    print(hours_since)
-    print(happiness)
+    user_posts = list(get_mongo().db.post.find(
+        {
+            "user_id": user_id_obj
+        }
+    ).sort("_id", -1))
 
     return render_template(
       "home.html",
       user=user,
       hours_since=hours_since,
-      happiness=happiness
+      happiness=happiness,
+      user_posts=user_posts
     )
 
 
