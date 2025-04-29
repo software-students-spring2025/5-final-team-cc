@@ -73,9 +73,12 @@ html, body {
   
   .pet-large {
     display: block;
-    width: 100px;
-    margin: 0 auto 1rem;
+    width: 300px;
+    margin: 1rem auto 0.1rem; /* ⬅ reduces bottom space */
   }
+  
+  
+  
   
   /* Posts */
   .feed-container {
@@ -142,4 +145,13 @@ html, body {
     background-color: #fdecea;
     color: #ff6b6b;
   }
-    
+  .happiness {
+    text-align: center;
+    margin-top: 0;       /* remove extra space above */
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #2c3e50;
+  }
+  
+  
+  
