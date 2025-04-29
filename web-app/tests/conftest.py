@@ -14,7 +14,7 @@ def create_app():
     app.secret_key = 'testsecret'
     
     # Configure MongoDB Atlas
-    mongo_uri = os.getenv('TEST_URI', '')
+    mongo_uri = os.getenv('TEST_URI')
     if mongo_uri:
         app.config["MONGO_URI"] = mongo_uri
         mongo = PyMongo(app)
