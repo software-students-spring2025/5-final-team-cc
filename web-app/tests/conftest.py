@@ -20,7 +20,8 @@ def create_app():
         mongo = PyMongo(app)
         app.mongo = mongo
     else:
-        raise ValueError("MONGO_URI environment variable is not set")
+        print(mongo_uri)
+        raise ValueError("TEST_URI environment variable is not set")
 
     # Configure template directory
     app.template_folder = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'app/templates')
