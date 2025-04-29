@@ -283,7 +283,7 @@ def post_reaction():
                     "user_id": user_id_obj,
                     "post_id": post_id_obj,
                     "reaction_type": reaction_type,
-                    "timestamp": datetime.utcnow()
+                    "timestamp": datetime.fromtimestamp(0, tz=timezone.utc)
                 }
                 get_mongo().db.reactions.insert_one(new_reaction)
                 

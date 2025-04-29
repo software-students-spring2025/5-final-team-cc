@@ -14,7 +14,7 @@ def create_app():
     app.secret_key = 'testsecret'
     
     # Configure MongoDB Atlas
-    mongo_uri = os.getenv('MONGO_URI', '')
+    mongo_uri = os.getenv('TEST_URI', '')
     if mongo_uri:
         app.config["MONGO_URI"] = mongo_uri
         mongo = PyMongo(app)
@@ -44,5 +44,8 @@ def client():
 
 @pytest.fixture
 def test_user_id():
-    # Use a valid ObjectId for testing
-    return ObjectId('68101b9e0bc5c47416d79076')  # Using the dummy johndoe test user
+    return ObjectId('681057d55e6a93269c8c9155')  # Using the dummy johndoe test user
+
+@pytest.fixture
+def test_happiness_user_id():
+    return ObjectId('68105df863a89476fe07f296') # Using the dummy test_happiness user
