@@ -1,5 +1,6 @@
 import pytest
 import os
+from os import environ
 from flask import Flask
 from flask_pymongo import PyMongo
 from bson import ObjectId
@@ -13,14 +14,19 @@ def create_app():
     app = Flask(__name__)
     app.secret_key = 'testsecret'
     
-    # Configure MongoDB Atlas
-    mongo_uri = os.getenv('MONGO_URI', '')
-    if mongo_uri:
-        app.config["MONGO_URI"] = mongo_uri
-        mongo = PyMongo(app)
-        app.mongo = mongo
-    else:
-        raise ValueError("MONGO_URI environment variable is not set")
+    mongo_uri = os.getenv('TEST_URI', '')
+
+    if not mongo_uri:
+        raise ValueError("TEST_URI environment variable is not set")
+    
+    if not (mongo_uri.startswith('mongodb://') or mongo_uri.startswith('mongodb+srv://')):
+        raise ValueError(f"TEST_URI must start with 'mongodb://' or 'mongodb+srv://'. Got: {mongo_uri}")
+
+    app.config["MONGO_URI"] = mongo_uri
+
+
+    mongo = PyMongo(app)
+    app.mongo = mongo
 
     # Configure template directory
     app.template_folder = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'app/templates')
@@ -44,5 +50,8 @@ def client():
 
 @pytest.fixture
 def test_user_id():
-    # Use a valid ObjectId for testing
-    return ObjectId('68101b9e0bc5c47416d79076')  # Using the dummy johndoe test user
+    return ObjectId('681057d55e6a93269c8c9155')  # Using the dummy johndoe test user
+
+@pytest.fixture
+def test_happiness_user_id():
+    return ObjectId('68105df863a89476fe07f296') # Using the dummy test_happiness user

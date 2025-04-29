@@ -13,6 +13,9 @@ typing-extensions = "*"
 [dev-packages]
 pytest = "*"
 pytest-flask = "*"
+pytest-cov = "*"
+beautifulsoup4 = "*"
+coverage = "*"
 
 [requires]
 python_version = "3.12"
