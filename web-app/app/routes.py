@@ -107,6 +107,8 @@ def feed():
     """
     Display feed
     """
+    if "user_id" not in session:
+        return redirect(url_for("login"))
  
     posts = list(get_mongo().db.post.find().sort("_id", -1))
     
@@ -170,6 +172,12 @@ def create_post():
         }
         
         get_mongo().db.post.insert_one(post)
+
+        get_mongo().db.user.update_one(
+            {"_id": ObjectId(session["user_id"])},
+            {"$set": {"last_post_time": datetime.now(timezone.utc)}}
+        )
+        
         flash("Your review has been posted!")
         
         return redirect(url_for("feed"))
