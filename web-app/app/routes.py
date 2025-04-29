@@ -81,25 +81,32 @@ def home():
     """
     home (tamagotchi)
     """
+    if "user_id" not in session:
+        return redirect(url_for("login"))
 
     user_id_obj = ObjectId(session["user_id"])
     user = get_mongo().db.user.find_one({"_id": user_id_obj})
 
-    last_posted = user.get("last_posted")
+    last_posted = user.get("last_post_time")
 
     if last_posted.tzinfo is None:
-        last_posted = last_posted.replace(tzinfo=UTC)
-    now = datetime.now(UTC)
+        last_posted = last_posted.replace(tzinfo=timezone.utc)
+    now = datetime.now(tz=timezone.utc)
 
     delta = now - last_posted
     hours_since = delta.total_seconds() / 3600
-    days_since = delta.days
+
+    happiness = max(0, min(1, 1-(hours_since/120)))
+    happiness = round(happiness*100)
+
+    print(hours_since)
+    print(happiness)
 
     return render_template(
       "home.html",
       user=user,
       hours_since=hours_since,
-      days_since=days_since
+      happiness=happiness
     )
 
 
@@ -149,10 +156,10 @@ def create_post():
     """
     Create a post
     """
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
     if request.method == "POST":
-        if "user_id" not in session:
-            flash("You must be logged in to create a post.")
-            return redirect(url_for("login"))
         
         game_title = request.form.get("game_title")
         rating = int(request.form.get("rating"))
