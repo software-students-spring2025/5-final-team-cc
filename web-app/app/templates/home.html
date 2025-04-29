@@ -15,26 +15,26 @@
 
     {# pick an image based on how many hours it’s been #}
     {% if hours_since > 120 %}
-      <img src="{{ url_for('static', filename='pet_happy.png') }}"
+      <img src="{{ url_for('static', filename='super_sad.png') }}"
            alt="Super Sad" class="pet-large" />
     {% elif hours_since > 96 %}
-      <img src="{{ url_for('static', filename='pet_content.png') }}"
+      <img src="{{ url_for('static', filename='sad.png') }}"
            alt="Sad" class="pet-large" />
     {% elif hours_since > 72 %}
-      <img src="{{ url_for('static', filename='pet_tired.png') }}"
+      <img src="{{ url_for('static', filename='neutral.png') }}"
            alt="Neutral" class="pet-large" />
     {% elif hours_since > 48 %}
-    <img src="{{ url_for('static', filename='pet_tired.png') }}"
+    <img src="{{ url_for('static', filename='happy.png') }}"
           alt="Happy" class="pet-large" />
     {% elif hours_since > 24 %}
-      <img src="{{ url_for('static', filename='pet_tired.png') }}"
+      <img src="{{ url_for('static', filename='super_happy.png') }}"
           alt="Super Happy" class="pet-large" />
     {% else %}
-      <img src="{{ url_for('static', filename='pet_sad.png') }}"
+      <img src="{{ url_for('static', filename='glowing.png') }}"
            alt="Glowing" class="pet-large" />
     {% endif %}
 
-    <p>Happiness: <span id="happiness">75</span> / 100</p>
+    <p>Happiness: <span id="happiness">{{ happiness }}</span> / 100</p>
   </main>
 </body>
 </html>
