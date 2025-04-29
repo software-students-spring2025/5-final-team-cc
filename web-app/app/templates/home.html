@@ -4,94 +4,66 @@
 <head>
   <meta charset="UTF-8" />
   <title>Home | GameLog</title>
-  <link rel="stylesheet" href="../static/style.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}" />
 </head>
+
 <body>
   {% include '_navbar.html' %}
 
-  <main class="home-center">
-    <h1>{{ user.username }}'s GameLog</h1>
-    <h2>{{ user.username }} Junior</h2>
+  <main class="home-container">
+    <div class="form-card">
+      <h1 class="welcome-title">{{ user.username }}'s GameLog</h1>
+      <h2 class="subtitle">{{ user.username }} Junior</h2>
 
-    {# x > 5, 5 >= x > 4, 4 >= x > 3, 3 >= x > 2, 2 >= x > 1, 1 >= x >= 0 #}
-    {% if hours_since > 120 %}
-      <img src="{{ url_for('static', filename='super_sad.png') }}"
-           alt="Super Sad" class="pet-large" />
-    {% elif hours_since > 96 %}
-      <img src="{{ url_for('static', filename='sad.png') }}"
-           alt="Sad" class="pet-large" />
-    {% elif hours_since > 72 %}
-      <img src="{{ url_for('static', filename='neutral.png') }}"
-           alt="Neutral" class="pet-large" />
-    {% elif hours_since > 48 %}
-    <img src="{{ url_for('static', filename='happy.png') }}"
-          alt="Happy" class="pet-large" />
-    {% elif hours_since > 24 %}
-      <img src="{{ url_for('static', filename='super_happy.png') }}"
-          alt="Super Happy" class="pet-large" />
-    {% else %}
-      <img src="{{ url_for('static', filename='glowing.png') }}"
-           alt="Glowing" class="pet-large" />
-    {% endif %}
+      {% if hours_since > 120 %}
+        <img src="{{ url_for('static', filename='super_sad.png') }}" alt="Super Sad" class="pet-large" />
+      {% elif hours_since > 96 %}
+        <img src="{{ url_for('static', filename='sad.png') }}" alt="Sad" class="pet-large" />
+      {% elif hours_since > 72 %}
+        <img src="{{ url_for('static', filename='neutral.png') }}" alt="Neutral" class="pet-large" />
+      {% elif hours_since > 48 %}
+        <img src="{{ url_for('static', filename='happy.png') }}" alt="Happy" class="pet-large" />
+      {% elif hours_since > 24 %}
+        <img src="{{ url_for('static', filename='super_happy.png') }}" alt="Super Happy" class="pet-large" />
+      {% else %}
+        <img src="{{ url_for('static', filename='glowing.png') }}" alt="Glowing" class="pet-large" />
+      {% endif %}
 
-    <p>Happiness: <span id="happiness">{{ happiness }}</span> / 100</p>
+      <p>Happiness: <span id="happiness">{{ happiness }}</span> / 100</p>
 
-    <p>Your posts:</p>
+      <hr class="divider">
 
-    {% if user_posts %}
-      <div class="feed-container">
-        {% for post in user_posts %}
-          <div class="post-card">
+      <h3>Your Posts</h3>
 
-            <h2>{{ post.game }}</h2>
-
-            <div class="rating-line">
-              Rating: {{ post.rating }}/10
-            </div>
-
-            <div class="recommendation-line {% if post.recommend %}recommend{% else %}not-recommend{% endif %}">
-              {% if post.recommend %}
-                ✓ Recommended
-              {% else %}
-                ✗ Not Recommended
-              {% endif %}
-            </div>
-
-            <div class="hours-played">
-              <strong>Hours Played:</strong> {{ post.hours_played }}
-            </div>
-
-            <hr class="divider">
-
-            <p class="description">{{ post.description }}</p>
-
-            <div class="post-footer">
-              <div class="likes-dislikes">
-                <button 
-                  id="like-btn-{{ post._id }}" 
-                  class="reaction-btn {% if post.user_reaction == 'like' %}active{% endif %}" 
-                  onclick="reactToPost('{{ post._id }}', 'like')"
-                >
-                  👍 <span id="like-count-{{ post._id }}">{{ post.likes }}</span>
-                </button>
-
-                <button 
-                  id="dislike-btn-{{ post._id }}" 
-                  class="reaction-btn {% if post.user_reaction == 'dislike' %}active{% endif %}" 
-                  onclick="reactToPost('{{ post._id }}', 'dislike')"
-                >
-                  👎 <span id="dislike-count-{{ post._id }}">{{ post.dislikes }}</span>
-                </button>
+      {% if user_posts %}
+        <div class="feed-container">
+          {% for post in user_posts %}
+            <div class="post-card">
+              <h2>{{ post.game }}</h2>
+              <div class="rating-line">Rating: {{ post.rating }}/10</div>
+              <div class="recommendation-line {% if post.recommend %}recommend{% else %}not-recommend{% endif %}">
+                {% if post.recommend %}✓ Recommended{% else %}✗ Not Recommended{% endif %}
               </div>
-              <small>Posted by {{ user.username }}</small>
+              <div><strong>Hours Played:</strong> {{ post.hours_played }}</div>
+              <p class="description">{{ post.description }}</p>
+              <div class="post-footer">
+                <div class="likes-dislikes">
+                  <button id="like-btn-{{ post._id }}" class="reaction-btn {% if post.user_reaction == 'like' %}active{% endif %}" onclick="reactToPost('{{ post._id }}', 'like')">
+                    👍 <span id="like-count-{{ post._id }}">{{ post.likes }}</span>
+                  </button>
+                  <button id="dislike-btn-{{ post._id }}" class="reaction-btn {% if post.user_reaction == 'dislike' %}active{% endif %}" onclick="reactToPost('{{ post._id }}', 'dislike')">
+                    👎 <span id="dislike-count-{{ post._id }}">{{ post.dislikes }}</span>
+                  </button>
+                </div>
+                <small>Posted by {{ user.username }}</small>
+              </div>
             </div>
-          </div>
-        {% endfor %}
-      </div>
-    {% else %}
-      <p>No reviews made yet. <a href="{{ url_for('create_post') }}">Post your first review!</a></p>
-    {% endif %}
-
+          {% endfor %}
+        </div>
+      {% else %}
+        <p>No reviews made yet. <a href="{{ url_for('create_post') }}">Post your first review!</a></p>
+      {% endif %}
+    </div>
   </main>
 </body>
 </html>
