@@ -195,4 +195,26 @@
     color: #4caf50;
   }
   
+
+  .empty-feed-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 40vh;
+    font-size: 1.2rem;
+    text-align: center;
+    color: #555;
+    padding: 2rem;
+  }
+  
+  .empty-feed-message a {
+    font-weight: bold;
+    color: #4a90e2;
+    text-decoration: none;
+  }
+  
+  .empty-feed-message a:hover {
+    text-decoration: underline;
+  }
+  
   

@@ -125,9 +125,11 @@
           </div>
         {% endfor %}
       </div>
-    {% else %}
-      <p>No reviews available yet. Be the first to <a href="{{ url_for('create_post') }}">post a review</a>!</p>
-    {% endif %}
+      {% else %}
+      <div class="empty-feed-message">
+        <p>No reviews available yet. Be the first to <a href="{{ url_for('create_post') }}">post a review</a>!</p>
+      </div>
+    {% endif %}    
   </main>
 </body>
 </html>

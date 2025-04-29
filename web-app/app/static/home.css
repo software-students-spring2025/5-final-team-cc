@@ -1,0 +1,145 @@
+html, body {
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f2f2f2; /* or pick your preferred solid */
+    margin: 0;
+    padding: 0;
+  }
+  
+  
+  /* Navbar (reuse from login.css or feed.css) */
+  .navbar {
+    background-color: #ffffff;
+    border-bottom: 2px solid #e0e0e0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  .nav-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+  }
+  
+  .nav-link {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    color: #2c3e50;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .nav-link:hover {
+    background-color: #f1f1f1;
+    color: #f39c12;
+  }
+  
+  /* Main layout */
+  .home-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 3rem 1rem;
+  }
+  
+  /* Card styling */
+  .form-card {
+    background-color: white;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 100%;
+  }
+  
+  .welcome-title {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+    text-align: center;
+  }
+  
+  .subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 1.5rem;
+  }
+  
+  .pet-large {
+    display: block;
+    width: 100px;
+    margin: 0 auto 1rem;
+  }
+  
+  /* Posts */
+  .feed-container {
+    margin-top: 2rem;
+  }
+  
+  .post-card {
+    background: #f9f9f9;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 12px;
+    border-left: 4px solid #4a90e2;
+  }
+  
+  .recommendation-line.recommend {
+    color: green;
+  }
+  
+  .recommendation-line.not-recommend {
+    color: red;
+  }
+  
+  .divider {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 1rem 0;
+  }
+  
+  .btn-primary {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #4caf50;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 1rem;
+  }
+  
+  .btn-primary:hover {
+    background-color: #45a049;
+  }
+  
+  .reaction-btn {
+    background: #eee;
+    border: none;
+    border-radius: 8px;
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    margin-right: 0.5rem;
+  }
+  
+  .reaction-btn.active {
+    background-color: #4a90e2;
+    color: white;
+  }
+  .logout {
+    color: #e74c3c;
+  }
+  
+  .logout:hover {
+    background-color: #fdecea;
+    color: #ff6b6b;
+  }
+    
