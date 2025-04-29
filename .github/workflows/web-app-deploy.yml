@@ -29,8 +29,8 @@ jobs:
       
       - name: Run unit tests in Docker container
         env:
-          TEST_URI: ${{secrets.TEST_URI}}
-        run: docker run --rm -e TEST_URI=${{secrets.TEST_URI}} web-app pytest
+          MONGO_URI: ${{secrets.ATLAS_MONGO_URI}}
+        run: docker run --rm -e MONGO_URI=${{secrets.ATLAS_MONGO_URI}} web-app pytest
 
   push-image:
     needs: build-and-test
